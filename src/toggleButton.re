@@ -15,6 +15,6 @@ let make = (~label, ~isToggled, ~onClick, _children) => {
         onChange=onClick
         style=(Utils.style(~display="none", ()))
       />
-      (Utils.text(label))
+      (Utils.string(label))
     </label>
 };

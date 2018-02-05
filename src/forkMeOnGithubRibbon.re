@@ -4,7 +4,7 @@ let project_url = "https://github.com/alanrsoares/reasonml-game-of-life";
 
 let ribbon =
   <div className="github-fork-ribbon">
-    <a href=project_url> (Utils.text("Fork me on Github")) </a>
+    <a href=project_url> (Utils.string("Fork me on Github")) </a>
   </div>;
 
 let make = _children => {

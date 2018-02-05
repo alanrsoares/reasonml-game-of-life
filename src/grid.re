@@ -1,5 +1,3 @@
-let listToElement = xs => xs |> Array.of_list |> ReasonReact.arrayToElement;
-
 let component = ReasonReact.statelessComponent("Grid");
 
 let renderTile = (onToggle, x: int, isAlive: bool) =>
@@ -7,13 +5,13 @@ let renderTile = (onToggle, x: int, isAlive: bool) =>
 
 let renderRow = (onToggle, y: int, row) =>
   <div className="grid-row" key=(string_of_int(y))>
-    (row |> List.mapi(renderTile(onToggle(y))) |> listToElement)
+    (row |> List.mapi(renderTile(onToggle(y))) |> Utils.list)
   </div>;
 
 let make = (~data: Game.grid, ~onToggle, _children) => {
   ...component,
   render: _self =>
     <div className="grid">
-      (data |> List.mapi(renderRow(onToggle)) |> listToElement)
+      (data |> List.mapi(renderRow(onToggle)) |> Utils.list)
     </div>
 };

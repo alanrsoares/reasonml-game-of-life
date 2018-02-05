@@ -6,17 +6,17 @@ let make = (~onReset, ~onRandom, ~onTick, _children) => {
     <div className="grid-controls">
       <div className="btn-group" role="group">
         <button className="btn btn-danger" onClick=onReset>
-          (Utils.text("RESET"))
+          (Utils.string("RESET"))
         </button>
         <button className="btn btn-success" onClick=onRandom>
-          (Utils.text("RANDOMIZE"))
+          (Utils.string("RANDOMIZE"))
         </button>
         <button className="btn btn-default" onClick=onTick>
           <i
             className="fa fa-fast-forward"
             style=(Utils.style(~marginRight="5px", ()))
           />
-          (Utils.text("NEXT"))
+          (Utils.string("NEXT"))
         </button>
       </div>
     </div>
