@@ -15,10 +15,9 @@ let make_blank_grid = (size: int) : grid =>
     Array.init(size, (_) => Array.init(size, (_) => false) |> Array.to_list)
   );
 
-let make_random_grid = (size: int) : grid => {
-  let seed = int_of_float(Js.Date.now());
+let make_random_grid = (size: int, seed: int) : grid => {
   Random.init(seed);
-  size |> make_blank_grid |> map_grid((_a, _b, _c) => Random.bool());
+  size |> make_blank_grid |> map_grid((_, _, _) => Random.bool());
 };
 
 let get_tile = ({x, y}: position, g: grid) : bool => {
