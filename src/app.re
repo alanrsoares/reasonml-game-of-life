@@ -24,6 +24,11 @@ let make = _children => {
     },
   render: self =>
     <div>
+      <GridControls
+        onReset=((_) => self.send(Reset))
+        onRandom=((_) => self.send(Random))
+        onTick=((_) => self.send(Tick))
+      />
       <div>
         <Grid
           data=self.state.grid
