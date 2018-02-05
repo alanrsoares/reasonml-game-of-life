@@ -1,11 +1,15 @@
 let listToElement = xs => xs |> Array.of_list |> ReasonReact.arrayToElement;
 
-let renderTile = (onToggle, y: int, x: int, isAlive: bool) =>
-  <Tile key=(string_of_int(x)) isAlive onToggle=(onToggle(y, x, isAlive)) />;
+let renderTile = (onToggle, x: int, isAlive: bool) =>
+  <Tile
+    key=(string_of_int(x))
+    isAlive
+    onToggle=((_) => onToggle(x))
+  />;
 
 let renderRow = (onToggle, y: int, row) =>
   <div className="grid-row" key=(string_of_int(y))>
-    (row |> List.mapi(renderTile(onToggle, y)) |> listToElement)
+    (row |> List.mapi(renderTile(onToggle(y))) |> listToElement)
   </div>;
 
 let component = ReasonReact.statelessComponent("Grid");

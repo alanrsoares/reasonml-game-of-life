@@ -1,19 +1,22 @@
 let component = ReasonReact.statelessComponent("Tile");
 
-let eventToObj = e => ReactDOMRe.domElementToObj(ReactEventRe.Mouse.target(e));
-
-let onMouseEvent = (onToggle, isAlive, e) =>
-  if (eventToObj(e)##which === 1) {
-    onToggle(isAlive);
+let handleMouseEvent = (onToggle, e) =>
+  if (ReactEventRe.Mouse.nativeEvent(e)##which === 1) {
+    onToggle();
   };
 
-let make = (~isAlive, ~onToggle, ~color="#FFF", _children) => {
+let make = (~isAlive, ~onToggle, _children) => {
   ...component,
   render: _self =>
     <div
       className="grid-tile"
-      onMouseOver=(onMouseEvent(onToggle, isAlive))
-      onMouseDown=(onMouseEvent(onToggle, isAlive))
-      style=(ReactDOMRe.Style.make(~color=isAlive ? color : "transparent", ()))
+      onMouseOver=(handleMouseEvent(onToggle))
+      onMouseDown=(handleMouseEvent(onToggle))
+      style=(
+        ReactDOMRe.Style.make(
+          ~backgroundColor=isAlive ? "#FFF" : "transparent",
+          ()
+        )
+      )
     />
 };

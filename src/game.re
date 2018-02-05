@@ -37,13 +37,17 @@ let count_living_neighbours = ({x, y}: position, g: grid) => {
   |> List.length;
 };
 
-let will_live = (p: position, is_alive: bool, g: grid) : bool => {
+let will_live = (p: position, isAlive: bool, g: grid) : bool => {
   let n = count_living_neighbours(p, g);
-  is_alive ? n >= 2 && n <= 3 : n === 3;
+  isAlive ? n >= 2 && n <= 3 : n === 3;
 };
 
-let next_generation = (g: grid) : grid =>
-  List.mapi(
-    (y, row) => row |> List.mapi((x, tile) => will_live({y, x}, tile, g)),
-    g
+let map_grid = (fn, g: grid) =>
+  List.mapi((y, row) => row |> List.mapi((x, tile) => fn({y, x}, tile, g)), g);
+
+let next_generation = map_grid(will_live);
+
+let toggle = (p: position) =>
+  map_grid(({y, x}, isAlive, _g) =>
+    x === p.x && y === p.y ? ! isAlive : isAlive
   );
