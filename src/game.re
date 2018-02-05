@@ -25,7 +25,7 @@ let get_tile = ({x, y}: position, g: grid) : bool => {
   let safe = safe_index(List.length(g));
   let x' = safe(x);
   let y' = safe(y);
-  List.nth(List.nth(g, x'), y');
+  List.nth(List.nth(g, y'), x');
 };
 
 let count_living_neighbours = ({x, y}: position, g: grid) => {
