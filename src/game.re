@@ -7,12 +7,16 @@ type position = {
 
 let safe_index = (len, i) => i === (-1) ? len - 1 : i === len ? 0 : i;
 
-let make_grid = (size: int) : grid =>
+let map_grid = (fn, g: grid) =>
+  List.mapi((y, row) => row |> List.mapi((x, tile) => fn({y, x}, tile, g)), g);
+
+let make_blank_grid = (size: int) : grid =>
   Array.to_list(
-    Array.init(size, (_) =>
-      Array.init(size, (_) => Random.bool()) |> Array.to_list
-    )
+    Array.init(size, (_) => Array.init(size, (_) => false) |> Array.to_list)
   );
+
+let make_random_grid = (size: int) : grid =>
+  size |> make_blank_grid |> map_grid((_a, _b, _c) => Random.bool());
 
 let get_tile = ({x, y}: position, g: grid) : bool => {
   let len = List.length(g);
@@ -41,9 +45,6 @@ let will_live = (p: position, isAlive: bool, g: grid) : bool => {
   let n = count_living_neighbours(p, g);
   isAlive ? n >= 2 && n <= 3 : n === 3;
 };
-
-let map_grid = (fn, g: grid) =>
-  List.mapi((y, row) => row |> List.mapi((x, tile) => fn({y, x}, tile, g)), g);
 
 let next_generation = map_grid(will_live);
 

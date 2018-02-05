@@ -5,9 +5,9 @@ open Expect;
 describe("Game", (_) => {
   let x = true;
   let o = false;
-  describe("make_grid", (_) =>
+  describe("make_random_grid", (_) =>
     test("should create a grid with the correct length", (_) =>
-      expect(Game.make_grid(3) |> List.length) |> toBe(3)
+      expect(Game.make_random_grid(3) |> List.length) |> toBe(3)
     )
   );
   describe("get_tile", (_) =>
