@@ -12,6 +12,10 @@ let make = (~onReset, ~onRandom, ~onTick, _children) => {
           (Utils.text("RANDOMIZE"))
         </button>
         <button className="btn btn-default" onClick=onTick>
+          <i
+            className="fa fa-fast-forward"
+            style=(Utils.style(~marginRight="5px", ()))
+          />
           (Utils.text("NEXT"))
         </button>
       </div>
