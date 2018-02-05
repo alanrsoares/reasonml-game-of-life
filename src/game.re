@@ -15,13 +15,17 @@ let make_blank_grid = (size: int) : grid =>
     Array.init(size, (_) => Array.init(size, (_) => false) |> Array.to_list)
   );
 
-let make_random_grid = (size: int) : grid =>
+let make_random_grid = (size: int) : grid => {
+  let seed = int_of_float(Js.Date.now());
+  Random.init(seed);
   size |> make_blank_grid |> map_grid((_a, _b, _c) => Random.bool());
+};
 
 let get_tile = ({x, y}: position, g: grid) : bool => {
-  let len = List.length(g);
-  let safe_indexes = [|y, x|] |> Array.map(safe_index(len));
-  List.nth(List.nth(g, safe_indexes[0]), safe_indexes[1]);
+  let safe = safe_index(List.length(g));
+  let x' = safe(x);
+  let y' = safe(y);
+  List.nth(List.nth(g, x'), y');
 };
 
 let count_living_neighbours = ({x, y}: position, g: grid) => {
