@@ -1,36 +1,19 @@
-type item = {
-  title: string,
-  completed: bool
-};
+let listToElement = xs => xs |> Array.of_list |> ReasonReact.arrayToElement;
 
-type state = {
-  /* this is a type w/ a type argument,
-   * similar to List<Item> in TypeScript,
-   * Flow, or Java */
-  items: list(item)
-};
+let renderTile = (onToggle, y: int, x: int, isAlive: bool) =>
+  <Tile key=(string_of_int(x)) isAlive onToggle=(onToggle(y, x, isAlive)) />;
 
-let component =
-  ReasonReact.reducerComponent(
-    "Grid"
-  ); /* I've gone ahead and made a shortened name for converting strings to elements */
+let renderRow = (onToggle, y: int, row) =>
+  <div className="grid-row" key=(string_of_int(y))>
+    (row |> List.mapi(renderTile(onToggle, y)) |> listToElement)
+  </div>;
 
-let str = ReasonReact.stringToElement;
+let component = ReasonReact.statelessComponent("Grid");
 
-let make = children => {
+let make = (~data: Game.grid, ~onToggle, _children) => {
   ...component,
-  initialState: () => {
-    items: [{title: "Write some things to do", completed: false}]
-  },
-  reducer: ((), _) => ReasonReact.NoUpdate,
-  render: ({state: {items}}) => {
-    let numItems = List.length(items);
-    <div className="app">
-      <div className="title"> (str("What to do")) </div>
-      <div className="items"> (str("Nothing")) </div>
-      <div className="footer">
-        (str(string_of_int(numItems) ++ " items"))
-      </div>
-    </div>;
-  }
+  render: _self =>
+    <div className="grid">
+      (data |> List.mapi(renderRow(onToggle)) |> listToElement)
+    </div>
 };
