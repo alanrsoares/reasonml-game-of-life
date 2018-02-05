@@ -13,10 +13,13 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "prepare": "npm link bs-platform"
+    "prepare": "npm link bs-platform",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "devDependencies": {
     "bs-jest": "^0.3.2",
+    "gh-pages": "^1.1.0",
     "jest-cli": "^20.0.4",
     "reason-react": "^0.3.2"
   }
