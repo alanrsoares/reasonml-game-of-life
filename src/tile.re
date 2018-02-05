@@ -13,10 +13,7 @@ let make = (~isAlive, ~onToggle, _children) => {
       onMouseOver=(handleMouseEvent(onToggle))
       onMouseDown=(handleMouseEvent(onToggle))
       style=(
-        ReactDOMRe.Style.make(
-          ~backgroundColor=isAlive ? "#FFF" : "transparent",
-          ()
-        )
+        Utils.style(~backgroundColor=isAlive ? "#fff" : "transparent", ())
       )
     />
 };
