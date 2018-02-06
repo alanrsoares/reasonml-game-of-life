@@ -24,7 +24,7 @@ let make =
           (Utils.text("NEXT"))
         </button>
         <ToggleButton
-          label="Autoplay"
+          label="AUTOPLAY"
           isToggled=isAutoplaying
           onClick=onToggleAutoplay
         />
