@@ -48,7 +48,7 @@ let will_live = (p: position, isAlive: bool, g: grid) : bool => {
 
 let next_generation = map_grid(will_live);
 
-let toggle = (p: position) =>
+let toggle_tile = (p: position) =>
   map_grid(({y, x}, isAlive, _g) =>
     x === p.x && y === p.y ? ! isAlive : isAlive
   );

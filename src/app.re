@@ -36,7 +36,10 @@ let make = (~boardSize=30, _children) => {
     | Tick =>
       ReasonReact.Update({...state, grid: Game.next_generation(state.grid)})
     | Toggle(position) =>
-      ReasonReact.Update({...state, grid: Game.toggle(position, state.grid)})
+      ReasonReact.Update({
+        ...state,
+        grid: Game.toggle_tile(position, state.grid)
+      })
     },
   render: self =>
     <div>
