@@ -12,7 +12,7 @@ let make =
         <button className="btn btn-success" onClick=onRandom>
           (Utils.text("RANDOMIZE"))
         </button>
-        <button className="btn btn-default" onClick=onTick>
+        <button className="btn btn-secondary" onClick=onTick>
           <i
             className="fa fa-fast-forward"
             style=(Utils.style(~marginRight="7px", ()))
