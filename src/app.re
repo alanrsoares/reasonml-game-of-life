@@ -1,15 +1,15 @@
 type state = {
   grid: Game.grid,
-  isRunning: bool,
+  isAutoplaying: bool,
   animationFrameId: ref(int)
 };
 
 type action =
-  | StartAutoplay
-  | StopAutoplay
-  | Tick
   | Random
   | Reset
+  | Start
+  | Stop
+  | Tick
   | Toggle(Game.position);
 
 let get_seed = () => int_of_float(Js.Date.now());
@@ -20,19 +20,19 @@ let make = (~boardSize=30, _children) => {
   ...component,
   initialState: () => {
     grid: Game.make_random_grid(boardSize, get_seed()),
-    isRunning: false,
+    isAutoplaying: false,
     animationFrameId: ref(0)
   },
   reducer: (action, state) =>
     switch action {
-    | StartAutoplay => ReasonReact.Update({...state, isRunning: true})
-    | StopAutoplay => ReasonReact.Update({...state, isRunning: false})
     | Random =>
       ReasonReact.Update({
         ...state,
         grid: Game.make_random_grid(boardSize, get_seed())
       })
     | Reset => ReasonReact.Update({...state, grid: Game.make_blank_grid(30)})
+    | Start => ReasonReact.Update({...state, isAutoplaying: true})
+    | Stop => ReasonReact.Update({...state, isAutoplaying: false})
     | Tick =>
       ReasonReact.Update({...state, grid: Game.next_generation(state.grid)})
     | Toggle(position) =>
@@ -41,7 +41,7 @@ let make = (~boardSize=30, _children) => {
   render: self =>
     <div>
       <GridControls
-        isRunning=self.state.isRunning
+        isAutoplaying=self.state.isAutoplaying
         onReset=((_) => self.send(Reset))
         onRandom=((_) => self.send(Random))
         onTick=((_) => self.send(Tick))
@@ -52,12 +52,12 @@ let make = (~boardSize=30, _children) => {
                 Utils.requestAnimationFrame(autoplay);
               self.send(Tick);
             };
-            if (self.state.isRunning) {
+            if (self.state.isAutoplaying) {
               Utils.cancelAnimationFrame(self.state.animationFrameId^);
-              self.send(StopAutoplay);
+              self.send(Stop);
             } else {
               autoplay();
-              self.send(StartAutoplay);
+              self.send(Start);
             };
           }
         )
