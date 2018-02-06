@@ -2,7 +2,7 @@ let component = ReasonReact.statelessComponent("GridControls");
 
 let make =
     (
-      ~isAutoplaying,
+      ~isPlaying,
       ~onReset,
       ~onRandom,
       ~onTick,
@@ -25,7 +25,7 @@ let make =
         </button>
         <ToggleButton
           label="AUTOPLAY"
-          isToggled=isAutoplaying
+          isToggled=isPlaying
           onClick=onToggleAutoplay
         />
       </div>
