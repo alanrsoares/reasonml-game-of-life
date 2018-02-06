@@ -14,12 +14,12 @@ type action =
 
 let get_seed = () => int_of_float(Js.Date.now());
 
-let component = ReasonReact.reducerComponent("TodoApp");
+let component = ReasonReact.reducerComponent("App");
 
-let make = _children => {
+let make = (~boardSize=30, _children) => {
   ...component,
   initialState: () => {
-    grid: Game.make_random_grid(30, get_seed()),
+    grid: Game.make_random_grid(boardSize, get_seed()),
     isRunning: false,
     animationFrameId: ref(0)
   },
@@ -30,7 +30,7 @@ let make = _children => {
     | Random =>
       ReasonReact.Update({
         ...state,
-        grid: Game.make_random_grid(30, get_seed())
+        grid: Game.make_random_grid(boardSize, get_seed())
       })
     | Reset => ReasonReact.Update({...state, grid: Game.make_blank_grid(30)})
     | Tick =>
