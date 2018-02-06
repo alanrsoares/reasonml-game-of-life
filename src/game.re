@@ -38,7 +38,7 @@ let count_living_neighbours = ({x, y}: position, g: grid) => {
     {y: y + 1, x},
     {y: y + 1, x: x + 1}
   ];
-  positions |> List.fold_left((acc, p) => get_tile(p, g) ? acc + 1 : acc, 0);
+  positions |> List.fold_left((count, p) => get_tile(p, g) ? count + 1 : count, 0);
 };
 
 let will_live = (p: position, isAlive: bool, g: grid) : bool => {
