@@ -1,4 +1,4 @@
-let component = ReasonReact.statelessComponent("ForkMeOnGithubRibbon");
+let component = ReasonReact.statelessComponent("GithubForkRibbon");
 
 let project_url = "https://github.com/alanrsoares/reasonml-game-of-life";
 

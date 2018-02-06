@@ -71,6 +71,6 @@ let make = (~boardSize=30, _children) => {
         data=self.state.grid
         onToggle=((y, x) => self.send(Toggle({y, x})))
       />
-      <ForkMeOnGithubRibbon />
+      <GithubForkRibbon />
     </div>
 };
