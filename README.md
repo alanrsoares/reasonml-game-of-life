@@ -5,3 +5,12 @@
 Built with [create-react-app](https://github.com/facebook/create-react-app) and [reason-scripts](https://github.com/reasonml-community/reason-scripts).
 
 *Check out the [demo](https://alanrsoares.github.io/reasonml-game-of-life/)*
+
+#### Features
+
+- Board randomizer
+- Step by step board generation
+- Autoplay
+
+#### Todo
+- [ ] Add profiler
