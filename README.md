@@ -1,4 +1,4 @@
-# Redux Game of Life
+# ReasonMl Game of Life
 
 **An educational implementation of [Conway's Game of Life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life) using Facebook's [ReasonML](https://reasonml.github.io/) and [ReasonReact](https://reasonml.github.io/reason-react/)**
 
