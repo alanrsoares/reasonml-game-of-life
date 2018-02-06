@@ -7,7 +7,7 @@ let make = (~label, ~isToggled, ~onClick, _children) => {
       htmlFor="autoplay"
       className=("btn btn-default " ++ (isToggled ? "active" : ""))>
       <i
-        className=("fa fa-lg " ++ (isToggled ? "active fa-pause" : "fa-play"))
+        className=("fa " ++ (isToggled ? "active fa-pause" : "fa-play"))
         style=(Utils.style(~marginRight="7px", ()))
       />
       <input
