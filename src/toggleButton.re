@@ -8,6 +8,6 @@ let make = (~label, ~isToggled, ~onClick, _children) => {
       <i
         className=("mr-2 fa " ++ (isToggled ? "active fa-pause" : "fa-play"))
       />
-      (Utils.text(label))
+      (Utils.render_string(label))
     </button>
 };

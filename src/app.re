@@ -12,9 +12,26 @@ type action =
   | Tick
   | Toggle(Game.position);
 
+type self_props = ReasonReact.self(state, ReasonReact.noRetainedProps, action);
+
 let get_seed = () => int_of_float(Js.Date.now());
 
 let component = ReasonReact.reducerComponent("App");
+
+let handle_toggle_autoplay = (self: self_props, _) => {
+  let rec autoplay = () => {
+    self.state.animationFrameId :=
+      Utils.request_animation_frame(autoplay);
+    self.send(Tick);
+  };
+  if (self.state.isAutoplaying) {
+    Utils.cancel_animation_frame(self.state.animationFrameId^);
+    self.send(Stop);
+  } else {
+    autoplay();
+    self.send(Start);
+  };
+};
 
 let make = (~boardSize=30, _children) => {
   ...component,
@@ -48,22 +65,7 @@ let make = (~boardSize=30, _children) => {
         onReset=((_) => self.send(Reset))
         onRandom=((_) => self.send(Random))
         onTick=((_) => self.send(Tick))
-        onToggleAutoplay=(
-          (_) => {
-            let rec autoplay = () => {
-              self.state.animationFrameId :=
-                Utils.requestAnimationFrame(autoplay);
-              self.send(Tick);
-            };
-            if (self.state.isAutoplaying) {
-              Utils.cancelAnimationFrame(self.state.animationFrameId^);
-              self.send(Stop);
-            } else {
-              autoplay();
-              self.send(Start);
-            };
-          }
-        )
+        onToggleAutoplay=(handle_toggle_autoplay(self))
       />
       <Grid
         data=self.state.grid

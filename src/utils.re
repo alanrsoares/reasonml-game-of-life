@@ -1,13 +1,13 @@
 [@bs.val]
-external requestAnimationFrame : (unit => unit) => int =
+external request_animation_frame : (unit => unit) => int =
   "requestAnimationFrame";
 
-[@bs.val] external cancelAnimationFrame : int => unit = "cancelAnimationFrame";
+[@bs.val] external cancel_animation_frame : int => unit = "cancelAnimationFrame";
 
-let text = ReasonReact.stringToElement;
+let render_string = ReasonReact.stringToElement;
 
-let array = ReasonReact.arrayToElement;
+let render_array = ReasonReact.arrayToElement;
 
-let list = xs => xs |> Array.of_list |> array;
+let render_list = xs => xs |> Array.of_list |> render_array;
 
-let style = ReactDOMRe.Style.make;
+let make_style = ReactDOMRe.Style.make;
