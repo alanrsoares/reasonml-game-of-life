@@ -13,10 +13,7 @@ let make =
           (Utils.text("RANDOMIZE"))
         </button>
         <button className="btn btn-secondary" onClick=onTick>
-          <i
-            className="fa fa-fast-forward"
-            style=(Utils.style(~marginRight="7px", ()))
-          />
+          <i className="mr-2 fa fa-fast-forward" />
           (Utils.text("NEXT"))
         </button>
         <ToggleButton

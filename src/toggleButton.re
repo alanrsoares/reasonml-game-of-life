@@ -6,8 +6,7 @@ let make = (~label, ~isToggled, ~onClick, _children) => {
     <button
       onClick className=("btn btn-secondary " ++ (isToggled ? "active" : ""))>
       <i
-        className=("fa " ++ (isToggled ? "active fa-pause" : "fa-play"))
-        style=(Utils.style(~marginRight="7px", ()))
+        className=("mr-2 fa " ++ (isToggled ? "active fa-pause" : "fa-play"))
       />
       (Utils.text(label))
     </button>
