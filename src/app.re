@@ -42,7 +42,7 @@ let make = (~boardSize=30, _children) => {
       })
     },
   render: self =>
-    <div>
+    <div className="app">
       <GridControls
         isAutoplaying=self.state.isAutoplaying
         onReset=((_) => self.send(Reset))
@@ -65,12 +65,10 @@ let make = (~boardSize=30, _children) => {
           }
         )
       />
-      <div>
-        <Grid
-          data=self.state.grid
-          onToggle=((y, x) => self.send(Toggle({y, x})))
-        />
-      </div>
+      <Grid
+        data=self.state.grid
+        onToggle=((y, x) => self.send(Toggle({y, x})))
+      />
       <ForkMeOnGithubRibbon />
     </div>
 };
