@@ -8,6 +8,7 @@ let make = (~label, ~isToggled, ~onClick, _children) => {
       className=("btn btn-default " ++ (isToggled ? "active" : ""))>
       <i
         className=("fa fa-lg " ++ (isToggled ? "active fa-pause" : "fa-play"))
+        style=(Utils.style(~marginRight="7px", ()))
       />
       <input
         _type="checkbox"
@@ -15,6 +16,6 @@ let make = (~label, ~isToggled, ~onClick, _children) => {
         onChange=onClick
         style=(Utils.style(~display="none", ()))
       />
-      (Utils.string(label))
+      (Utils.text(label))
     </label>
 };

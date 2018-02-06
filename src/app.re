@@ -1,6 +1,12 @@
-type state = {grid: Game.grid};
+type state = {
+  grid: Game.grid,
+  isRunning: bool,
+  animationFrameId: ref(int)
+};
 
 type action =
+  | StartAutoplay
+  | StopAutoplay
   | Tick
   | Random
   | Reset
@@ -12,32 +18,54 @@ let component = ReasonReact.reducerComponent("TodoApp");
 
 let make = _children => {
   ...component,
-  initialState: () => {grid: Game.make_random_grid(30, get_seed())},
+  initialState: () => {
+    grid: Game.make_random_grid(30, get_seed()),
+    isRunning: false,
+    animationFrameId: ref(0)
+  },
   reducer: (action, state) =>
     switch action {
+    | StartAutoplay => ReasonReact.Update({...state, isRunning: true})
+    | StopAutoplay => ReasonReact.Update({...state, isRunning: false})
     | Random =>
-      ReasonReact.Update({grid: Game.make_random_grid(30, get_seed())})
-    | Reset => ReasonReact.Update({grid: Game.make_blank_grid(30)})
-    | Tick => ReasonReact.Update({grid: Game.next_generation(state.grid)})
+      ReasonReact.Update({
+        ...state,
+        grid: Game.make_random_grid(30, get_seed())
+      })
+    | Reset => ReasonReact.Update({...state, grid: Game.make_blank_grid(30)})
+    | Tick =>
+      ReasonReact.Update({...state, grid: Game.next_generation(state.grid)})
     | Toggle(position) =>
-      ReasonReact.Update({grid: Game.toggle(position, state.grid)})
+      ReasonReact.Update({...state, grid: Game.toggle(position, state.grid)})
     },
   render: self =>
     <div>
       <GridControls
+        isRunning=self.state.isRunning
         onReset=((_) => self.send(Reset))
         onRandom=((_) => self.send(Random))
         onTick=((_) => self.send(Tick))
+        onToggleAutoplay=(
+          (_) => {
+            let rec autoplay = () => {
+              self.state.animationFrameId :=
+                Utils.requestAnimationFrame(autoplay);
+              self.send(Tick);
+            };
+            if (self.state.isRunning) {
+              Utils.cancelAnimationFrame(self.state.animationFrameId^);
+              self.send(StopAutoplay);
+            } else {
+              autoplay();
+              self.send(StartAutoplay);
+            };
+          }
+        )
       />
       <div>
         <Grid
           data=self.state.grid
-          onToggle=(
-            (y, x) => {
-              Js.log("foo");
-              self.send(Toggle({y, x}));
-            }
-          )
+          onToggle=((y, x) => self.send(Toggle({y, x})))
         />
       </div>
       <ForkMeOnGithubRibbon />

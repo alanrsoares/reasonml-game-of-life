@@ -17,7 +17,7 @@ let make_blank_grid = (size: int) : grid =>
 
 let make_random_grid = (size: int, seed: int) : grid => {
   Random.init(seed);
-  size |> make_blank_grid |> map_grid((_, _, _) => Random.bool());
+  size |> make_blank_grid |> map_grid((_, _, _) => Random.int(10) > 7);
 };
 
 let get_tile = ({x, y}: position, g: grid) : bool => {
