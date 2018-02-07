@@ -1,6 +1,6 @@
 {
-  "short_name": "Reason Game of Life",
-  "name": "ReasonReact Game of Life",
+  "short_name": "Game of Life",
+  "name": "ReasonML Game of Life",
   "icons": [
     {
       "src": "favicon.ico",
