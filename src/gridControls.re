@@ -13,7 +13,10 @@ let make = (~isPlaying, ~onReset, ~onRandom, ~onTick, ~onToggleAutoplay, _childr
         <button className="btn btn-success" onClick=onRandom>
           (Utils.render_string("RANDOMIZE"))
         </button>
-        <button className="btn btn-secondary" onClick=onTick>
+        <button
+          className="btn btn-secondary"
+          disabled=(Js.Boolean.to_js_boolean(isPlaying))
+          onClick=onTick>
           <i className="mr-2 fa fa-fast-forward" />
           (Utils.render_string("NEXT"))
         </button>
