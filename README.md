@@ -6,6 +6,8 @@ Built with [create-react-app](https://github.com/facebook/create-react-app) and 
 
 *Check out the [demo](https://alanrsoares.github.io/reasonml-game-of-life/)*
 
+![screenshot](/public/game-ss.png)
+
 #### Features
 
 - Board randomizer
