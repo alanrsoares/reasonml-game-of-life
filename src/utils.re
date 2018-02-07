@@ -1,6 +1,4 @@
-[@bs.val]
-external request_animation_frame : (unit => unit) => int =
-  "requestAnimationFrame";
+[@bs.val] external request_animation_frame : (unit => unit) => int = "requestAnimationFrame";
 
 [@bs.val] external cancel_animation_frame : int => unit = "cancelAnimationFrame";
 

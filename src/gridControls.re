@@ -2,15 +2,7 @@
 
 let component = ReasonReact.statelessComponent("GridControls");
 
-let make =
-    (
-      ~isPlaying,
-      ~onReset,
-      ~onRandom,
-      ~onTick,
-      ~onToggleAutoplay,
-      _children
-    ) => {
+let make = (~isPlaying, ~onReset, ~onRandom, ~onTick, ~onToggleAutoplay, _children) => {
   ...component,
   render: _self =>
     <div className="GridControls">
@@ -25,11 +17,7 @@ let make =
           <i className="mr-2 fa fa-fast-forward" />
           (Utils.render_string("NEXT"))
         </button>
-        <ToggleButton
-          label="AUTOPLAY"
-          isToggled=isPlaying
-          onClick=onToggleAutoplay
-        />
+        <ToggleButton label="AUTOPLAY" isToggled=isPlaying onClick=onToggleAutoplay />
       </div>
     </div>
 };

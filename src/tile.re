@@ -20,7 +20,8 @@ let make = (~size, ~isAlive, ~onToggle, _children) => {
           ~backgroundColor=isAlive ? "#fff" : "transparent",
           ~width=tileSize,
           ~height=tileSize,
-          ())
+          ()
+        )
       )
     />;
   }
