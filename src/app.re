@@ -59,7 +59,7 @@ let make = (~boardSize=30, _children) => {
       })
     },
   render: self =>
-    <div className="app">
+    <div className="App">
       <GridControls
         isPlaying=self.state.isPlaying
         onReset=((_) => self.send(Reset))

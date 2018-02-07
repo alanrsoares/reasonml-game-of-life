@@ -1,0 +1,16 @@
+.Tile {
+  background-color: #2e3338;
+  display: inline-block;
+  width: 13px;
+  height: 13px;
+  cursor: pointer;
+  border: solid 1px #111;
+  -webkit-transition: background-color 0.15s ease-out;
+  -moz-transition: background-color 0.15s ease-out;
+  -o-transition: background-color 0.15s ease-out;
+  transition: background-color 0.15s ease-out;
+}
+
+.Tile:hover {
+  background-color: #484D52;
+}

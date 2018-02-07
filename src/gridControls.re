@@ -1,3 +1,5 @@
+[%bs.raw {|require('./gridControls.css')|}];
+
 let component = ReasonReact.statelessComponent("GridControls");
 
 let make =
@@ -11,7 +13,7 @@ let make =
     ) => {
   ...component,
   render: _self =>
-    <div className="grid-controls">
+    <div className="GridControls">
       <div className="btn-group" role="group">
         <button className="btn btn-danger" onClick=onReset>
           (Utils.render_string("RESET"))

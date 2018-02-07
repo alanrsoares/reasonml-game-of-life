@@ -1,3 +1,5 @@
+[%bs.raw {|require('./tile.css')|}];
+
 let component = ReasonReact.statelessComponent("Tile");
 
 let handleMouseEvent = (onToggle, e) =>
@@ -9,7 +11,7 @@ let make = (~isAlive, ~onToggle, _children) => {
   ...component,
   render: _self =>
     <div
-      className="grid-tile"
+      className="Tile"
       onMouseOver=(handleMouseEvent(onToggle))
       onMouseDown=(handleMouseEvent(onToggle))
       style=(
