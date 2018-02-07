@@ -41,10 +41,10 @@ describe("Game", () => {
         [o, o, o, o, o]
       ];
       test("should transform a horizontal to a vertical line", () =>
-        expect(grid |> Game.next_generation) |> toEqual(next_grid)
+        expect(grid |> Game.next_generation(ref(0))) |> toEqual(next_grid)
       );
       test("should revert a vertical line to a horizontal one", () =>
-        expect(next_grid |> Game.next_generation) |> toEqual(grid)
+        expect(next_grid |> Game.next_generation(ref(0))) |> toEqual(grid)
       );
     });
     describe("the glider pattern", () => {
@@ -63,7 +63,7 @@ describe("Game", () => {
         [o, o, o, o, o]
       ];
       test("should move a glider to the next step", () =>
-        expect(grid |> Game.next_generation) |> toEqual(next_grid)
+        expect(grid |> Game.next_generation(ref(0))) |> toEqual(next_grid)
       );
     });
   });

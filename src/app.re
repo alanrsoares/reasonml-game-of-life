@@ -1,7 +1,10 @@
+[%bs.raw {|require('./app.css')|}];
+
 type state = {
   grid: Game.grid,
   isPlaying: bool,
-  animationFrameId: ref(int)
+  animationFrameId: ref(int),
+  score: ref(int)
 };
 
 type action =
@@ -37,20 +40,29 @@ let make = (~tileSize, ~boardSize, _children) => {
   initialState: () => {
     grid: Game.make_random_grid(boardSize, make_seed()),
     isPlaying: false,
-    animationFrameId: ref(0)
+    animationFrameId: ref(0),
+    score: ref(0)
   },
   reducer: (action, state) =>
     switch action {
     | Random =>
       ReasonReact.Update({
         ...state,
-        grid: Game.make_random_grid(boardSize, make_seed())
+        grid: Game.make_random_grid(boardSize, make_seed()),
+        score: ref(0)
       })
-    | Reset => ReasonReact.Update({...state, grid: Game.make_blank_grid(30)})
+    | Reset => ReasonReact.Update({
+      ...state,
+      grid: Game.make_blank_grid(30),
+      score: ref(0)
+    })
     | Start => ReasonReact.Update({...state, isPlaying: true})
     | Stop => ReasonReact.Update({...state, isPlaying: false})
     | Tick =>
-      ReasonReact.Update({...state, grid: Game.next_generation(state.grid)})
+      ReasonReact.Update({
+        ...state,
+        grid: Game.next_generation(state.score, state.grid)
+      })
     | Toggle(position) =>
       ReasonReact.Update({
         ...state,
@@ -66,6 +78,9 @@ let make = (~tileSize, ~boardSize, _children) => {
         onTick=((_) => self.send(Tick))
         onToggleAutoplay=(handle_toggle_autoplay(self))
       />
+      <div className="App--score align-text-center">
+        (Utils.render_string(string_of_int(self.state.score^)))
+      </div>
       <Grid
         tileSize
         data=self.state.grid

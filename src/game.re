@@ -41,12 +41,14 @@ let count_living_neighbours = ({x, y}: position, g: grid) => {
   positions |> List.fold_left((count, p) => get_tile(p, g) ? count + 1 : count, 0);
 };
 
-let will_live = (p: position, isAlive: bool, g: grid) : bool => {
+let will_live = (score: ref(int), p: position, isAlive: bool, g: grid) : bool => {
   let n = count_living_neighbours(p, g);
-  isAlive ? n >= 2 && n <= 3 : n === 3;
+  let it_lives = isAlive ? n >= 2 && n <= 3 : n === 3;
+  score := (it_lives && ! isAlive) ? score^ + 1 : score^;
+  it_lives;
 };
 
-let next_generation = map_grid(will_live);
+let next_generation = (score: ref(int), g: grid): grid => g |> map_grid(will_live(score));
 
 let toggle_tile = (p: position) =>
   map_grid(({y, x}, isAlive, _g) =>
