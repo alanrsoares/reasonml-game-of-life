@@ -68,6 +68,7 @@ let make = (~tileSize, ~boardSize, _children) => {
         onToggleAutoplay=(handle_toggle_autoplay(self))
       />
       <div className="App--score align-text-center">
+        <span className="App--score-label"> (Utils.render_string("score")) </span>
         (Utils.render_string(string_of_int(self.state.score^)))
       </div>
       <Grid tileSize data=self.state.grid onToggle=((y, x) => self.send(Toggle({y, x}))) />

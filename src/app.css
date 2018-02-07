@@ -5,9 +5,15 @@
   text-align: right;
   font-size: 32px;
   font-weight: 400;
-  font-family: monospace;
+  font-family: "Courier New", Courier, "Lucida Sans Typewriter", "Lucida Typewriter", monospace;
   border-radius: 4px;
   background-color: #111;
   width: 428px;
   color: gold;
+}
+
+.App--score-label {
+  float: left;
+  color: #666;
+  font-weight: 500;
 }
