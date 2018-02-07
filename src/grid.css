@@ -1,11 +1,6 @@
 .Grid {
   margin: auto;
   border: solid 2px #111;
-  width: 400px;
   padding-left: 3px;
   padding-bottom: 7px;
-}
-
-.Grid--row {
-  height: 13px;
 }

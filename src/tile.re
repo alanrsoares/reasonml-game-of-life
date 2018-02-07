@@ -7,15 +7,21 @@ let handleMouseEvent = (onToggle, e) =>
     onToggle();
   };
 
-let make = (~isAlive, ~onToggle, _children) => {
+let make = (~size, ~isAlive, ~onToggle, _children) => {
   ...component,
-  render: _self =>
+  render: _self => {
+    let tileSize = string_of_int(size) ++ "px";
     <div
       className="Tile"
       onMouseOver=(handleMouseEvent(onToggle))
       onMouseDown=(handleMouseEvent(onToggle))
       style=(
-        Utils.make_style(~backgroundColor=isAlive ? "#fff" : "transparent", ())
+        Utils.make_style(
+          ~backgroundColor=isAlive ? "#fff" : "transparent",
+          ~width=tileSize,
+          ~height=tileSize,
+          ())
       )
-    />
+    />;
+  }
 };

@@ -20,8 +20,7 @@ let component = ReasonReact.reducerComponent("App");
 
 let handle_toggle_autoplay = (self: self_props, _) => {
   let rec play = () => {
-    self.state.animationFrameId :=
-      Utils.request_animation_frame(play);
+    self.state.animationFrameId := Utils.request_animation_frame(play);
     self.send(Tick);
   };
   if (self.state.isPlaying) {
@@ -33,7 +32,7 @@ let handle_toggle_autoplay = (self: self_props, _) => {
   };
 };
 
-let make = (~boardSize=30, _children) => {
+let make = (~tileSize, ~boardSize, _children) => {
   ...component,
   initialState: () => {
     grid: Game.make_random_grid(boardSize, make_seed()),
@@ -68,6 +67,7 @@ let make = (~boardSize=30, _children) => {
         onToggleAutoplay=(handle_toggle_autoplay(self))
       />
       <Grid
+        tileSize
         data=self.state.grid
         onToggle=((y, x) => self.send(Toggle({y, x})))
       />

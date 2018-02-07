@@ -2,18 +2,28 @@
 
 let component = ReasonReact.statelessComponent("Grid");
 
-let renderTile = (onToggle, x: int, isAlive: bool) =>
-  <Tile key=(string_of_int(x)) isAlive onToggle=((_) => onToggle(x)) />;
+let renderTile = (size, onToggle, x: int, isAlive: bool) =>
+  <Tile
+    isAlive
+    size
+    key=(string_of_int(x))
+    onToggle=((_) => onToggle(x))
+  />;
 
-let renderRow = (onToggle, y: int, row) =>
-  <div className="Grid--row" key=(string_of_int(y))>
-    (row |> List.mapi(renderTile(onToggle(y))) |> Utils.render_list)
+let renderRow = (tileSize, onToggle, y: int, row) =>
+  <div
+    className="Grid--row"
+    key=(string_of_int(y))
+    style=(Utils.make_style(~height=(string_of_int(tileSize) ++ "px"), ()))>
+    (row |> List.mapi(renderTile(tileSize, onToggle(y))) |> Utils.render_list)
   </div>;
 
-let make = (~data: Game.grid, ~onToggle, _children) => {
+let make = (~tileSize, ~data: Game.grid, ~onToggle, _children) => {
   ...component,
   render: _self =>
-    <div className="Grid">
-      (data |> List.mapi(renderRow(onToggle)) |> Utils.render_list)
+    <div
+      className="Grid"
+      style=(Utils.make_style(~width=(string_of_int(tileSize * List.length(data) + 10) ++ "px"), ()))>
+      (data |> List.mapi(renderRow(tileSize, onToggle)) |> Utils.render_list)
     </div>
 };
