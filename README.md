@@ -11,6 +11,13 @@ Built with [create-react-app](https://github.com/facebook/create-react-app) and 
 - Board randomizer
 - Step by step board generation
 - Autoplay
+- Score
 
 #### Todo
+- [ ] Add score timer
 - [ ] Add profiler
+- [ ] Add score board
+
+
+#### License
+MIT
