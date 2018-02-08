@@ -4,7 +4,10 @@ type state = {
   grid: Game.grid,
   isPlaying: bool,
   animationFrameId: ref(int),
-  score: ref(int)
+  score: ref(int),
+  startedAt: option(float),
+  ticks: int,
+  frameRate: int
 };
 
 type action =
@@ -41,7 +44,10 @@ let make = (~tileSize, ~boardSize, _children) => {
     grid: Game.make_random_grid(boardSize, make_seed()),
     isPlaying: false,
     animationFrameId: ref(0),
-    score: ref(0)
+    score: ref(0),
+    startedAt: None,
+    ticks: 0,
+    frameRate: 0
   },
   reducer: (action, state) =>
     switch action {
@@ -51,10 +57,25 @@ let make = (~tileSize, ~boardSize, _children) => {
         grid: Game.make_random_grid(boardSize, make_seed()),
         score: ref(0)
       })
-    | Reset => ReasonReact.Update({...state, grid: Game.make_blank_grid(30), score: ref(0)})
-    | Start => ReasonReact.Update({...state, isPlaying: true})
-    | Stop => ReasonReact.Update({...state, isPlaying: false})
-    | Tick => ReasonReact.Update({...state, grid: Game.next_generation(state.score, state.grid)})
+    | Reset =>
+      ReasonReact.Update({...state, grid: Game.make_blank_grid(30), score: ref(0), ticks: 0})
+    | Start => ReasonReact.Update({...state, isPlaying: true, startedAt: Some(Js.Date.now())})
+    | Stop =>
+      ReasonReact.Update({...state, isPlaying: false, startedAt: None, frameRate: 0, ticks: 0})
+    | Tick =>
+      ReasonReact.Update({
+        ...state,
+        grid: Game.next_generation(state.score, state.grid),
+        ticks: state.isPlaying ? state.ticks + 1 : state.ticks,
+        frameRate:
+          switch state.startedAt {
+          | None => state.frameRate
+          | Some(startedAt) =>
+            Js.Math.ceil(
+              float_of_int(state.ticks) /. ((Js.Date.now() -. startedAt) /. float_of_int(1000))
+            )
+          }
+      })
     | Toggle(position) =>
       ReasonReact.Update({...state, grid: Game.toggle_tile(position, state.grid)})
     },
@@ -72,6 +93,13 @@ let make = (~tileSize, ~boardSize, _children) => {
         (Utils.render_string(string_of_int(self.state.score^)))
       </div>
       <Grid tileSize data=self.state.grid onToggle=((y, x) => self.send(Toggle({y, x}))) />
+      <div className="App--profiler align-text-center">
+        (
+          self.state.isPlaying ?
+            Utils.render_string("update rate: " ++ string_of_int(self.state.frameRate) ++ " fps") :
+            Utils.render_string("")
+        )
+      </div>
       <GithubForkRibbon />
     </div>
 };

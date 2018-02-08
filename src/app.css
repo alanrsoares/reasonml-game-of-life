@@ -12,6 +12,13 @@
   color: gold;
 }
 
+.App--profiler {
+  margin: auto;
+  text-align: right;
+  width: 428px;
+  color: #666;
+}
+
 .App--score-label {
   float: left;
   color: #666;
