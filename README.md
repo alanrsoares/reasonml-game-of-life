@@ -14,11 +14,11 @@ Built with [create-react-app](https://github.com/facebook/create-react-app) and 
 - Step by step board generation
 - Autoplay
 - Score
+- Profiler
 
 #### Todo
 - [ ] Add score timer
-- [ ] Add profiler
-- [ ] Add score board
+- [ ] Add score leader board
 
 
 #### License
