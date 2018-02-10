@@ -58,10 +58,26 @@ let make = (~tileSize, ~boardSize, _children) => {
         score: ref(0)
       })
     | Reset =>
-      ReasonReact.Update({...state, grid: Game.make_blank_grid(30), score: ref(0), ticks: 0})
-    | Start => ReasonReact.Update({...state, isPlaying: true, startedAt: Some(Js.Date.now())})
+      ReasonReact.Update({
+        ...state,
+        grid: Game.make_blank_grid(30),
+        score: ref(0),
+        ticks: 0
+      })
+    | Start =>
+      ReasonReact.Update({
+        ...state,
+        isPlaying: true,
+        startedAt: Some(Js.Date.now())
+      })
     | Stop =>
-      ReasonReact.Update({...state, isPlaying: false, startedAt: None, frameRate: 0, ticks: 0})
+      ReasonReact.Update({
+        ...state,
+        isPlaying: false,
+        startedAt: None,
+        frameRate: 0,
+        ticks: 0
+      })
     | Tick =>
       ReasonReact.Update({
         ...state,
@@ -72,12 +88,16 @@ let make = (~tileSize, ~boardSize, _children) => {
           | None => state.frameRate
           | Some(startedAt) =>
             Js.Math.ceil(
-              float_of_int(state.ticks) /. ((Js.Date.now() -. startedAt) /. float_of_int(1000))
+              float_of_int(state.ticks)
+              /. ((Js.Date.now() -. startedAt) /. float_of_int(1000))
             )
           }
       })
     | Toggle(position) =>
-      ReasonReact.Update({...state, grid: Game.toggle_tile(position, state.grid)})
+      ReasonReact.Update({
+        ...state,
+        grid: Game.toggle_tile(position, state.grid)
+      })
     },
   render: self =>
     <div className="App">
@@ -89,15 +109,25 @@ let make = (~tileSize, ~boardSize, _children) => {
         onToggleAutoplay=(handle_toggle_autoplay(self))
       />
       <div className="App--score align-text-center">
-        <span className="App--score-label"> (Utils.render_string("score")) </span>
+        <span className="App--score-label">
+          (Utils.render_string("score"))
+        </span>
         (Utils.render_string(string_of_int(self.state.score^)))
       </div>
-      <Grid tileSize data=self.state.grid onToggle=((y, x) => self.send(Toggle({y, x}))) />
-      <div className="App--profiler align-text-center">
+      <Grid
+        tileSize
+        data=self.state.grid
+        onToggle=((y, x) => self.send(Toggle({y, x})))
+      />
+      <div className="App--profiler">
         (
-          self.state.isPlaying ?
-            Utils.render_string("update rate: " ++ string_of_int(self.state.frameRate) ++ " fps") :
-            Utils.render_string("")
+          Utils.render_string(
+            self.state.isPlaying ?
+              "avg update rate: "
+              ++ string_of_int(self.state.frameRate)
+              ++ " fps" :
+              ""
+          )
         )
       </div>
       <GithubForkRibbon />
