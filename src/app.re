@@ -20,6 +20,11 @@ type action =
 
 type self_props = ReasonReact.self(state, ReasonReact.noRetainedProps, action);
 
+let avg_frame_rate = (ticks, startedAt) =>
+  Js.Math.ceil(
+    float_of_int(ticks) /. ((Js.Date.now() -. startedAt) /. float_of_int(1000))
+  );
+
 let make_seed = () => int_of_float(Js.Date.now());
 
 let component = ReasonReact.reducerComponent("App");
@@ -86,11 +91,7 @@ let make = (~tileSize, ~boardSize, _children) => {
         frameRate:
           switch state.startedAt {
           | None => state.frameRate
-          | Some(startedAt) =>
-            Js.Math.ceil(
-              float_of_int(state.ticks)
-              /. ((Js.Date.now() -. startedAt) /. float_of_int(1000))
-            )
+          | Some(startedAt) => avg_frame_rate(state.ticks, startedAt)
           }
       })
     | Toggle(position) =>
