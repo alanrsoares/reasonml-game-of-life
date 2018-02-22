@@ -92,7 +92,7 @@ let make = (~tileSize, ~boardSize, _children) => {
         <span className="App--score-label"> (Utils.render_string("score")) </span>
         (Utils.render_string(string_of_int(self.state.score^)))
       </div>
-      <Grid tileSize data=self.state.grid onToggle=((y, x) => self.send(Toggle({y, x}))) />
+      <Grid tileSize data=self.state.grid onToggle=((y, x) => self.send(Toggle((y, x)))) />
       <div className="App--profiler">
         (
           Utils.render_string(

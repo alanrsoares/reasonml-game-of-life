@@ -13,14 +13,14 @@ describe("Game", () => {
   describe("get_tile", () =>
     test("should get the value of a tile given the positions", () => {
       let grid = [[o, o, o], [x, x, x], [o, o, o]];
-      let tile_position: Game.position = {y: 1, x: 1};
+      let tile_position: Game.position = (1, 1);
       expect(grid |> Game.get_tile(tile_position)) |> toBe(true);
     })
   );
   describe("count_living_neighbours", () =>
     test("should get number of live neighbours of a given tile", () => {
       let grid = [[o, o, o], [x, x, x], [o, o, o]];
-      let tile_position: Game.position = {y: 0, x: 1};
+      let tile_position: Game.position = (0, 1);
       expect(grid |> Game.count_living_neighbours(tile_position)) |> toBe(3);
     })
   );
