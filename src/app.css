@@ -23,27 +23,3 @@
   color: #666;
   font-weight: 500;
 }
-
-.mobile-hidden {
-  @media(max-width: 501px) {
-    display: none;
-  }
-}
-
-.mobile-visible {
-  @media(max-width: 500px) {
-    display: none;
-  }
-}
-
-.desktop-hidden {
-  @media(min-width: 501px) {
-    display: none;
-  }
-}
-
-.desktop-visible {
-  @media(min-width: 500px) {
-    display: none;
-  }
-}
