@@ -8,7 +8,7 @@ let map_grid = (fn: (position, bool, grid) => bool, g: grid) =>
   List.mapi((y, row) => row |> List.mapi((x, tile) => fn((y, x), tile, g)), g);
 
 let make_blank_grid = (size: int) : grid =>
-  Array.to_list(Array.init(size, (_) => Array.init(size, (_) => false) |> Array.to_list));
+  Array.make(size, Array.make(size, false) |> Array.to_list) |> Array.to_list;
 
 let make_random_grid = (size: int, seed: int) : grid => {
   Random.init(seed);
