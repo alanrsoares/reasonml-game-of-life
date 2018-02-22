@@ -8,13 +8,13 @@
   font-family: "Courier New", Courier, "Lucida Sans Typewriter", "Lucida Typewriter", monospace;
   border-radius: 4px;
   background-color: #111;
-  width: 428px;
+  width: 380px;
   color: gold;
 }
 
 .App--profiler {
   margin: auto;
-  width: 428px;
+  width: 380px;
   color: #666;
 }
 
@@ -22,4 +22,28 @@
   float: left;
   color: #666;
   font-weight: 500;
+}
+
+.mobile-hidden {
+  @media(max-width: 501px) {
+    display: none;
+  }
+}
+
+.mobile-visible {
+  @media(max-width: 500px) {
+    display: none;
+  }
+}
+
+.desktop-hidden {
+  @media(min-width: 501px) {
+    display: none;
+  }
+}
+
+.desktop-visible {
+  @media(min-width: 500px) {
+    display: none;
+  }
 }

@@ -18,12 +18,7 @@ let make = (~tileSize, ~data: Game.grid, ~onToggle, _children) => {
   render: _self =>
     <div
       className="Grid"
-      style=(
-        Utils.make_style(
-          ~width=string_of_int(tileSize * List.length(data) + 10) ++ "px",
-          ()
-        )
-      )>
+      style=(Utils.make_style(~width=string_of_int(tileSize * List.length(data) + 10) ++ "px", ()))>
       (data |> List.mapi(renderRow(tileSize, onToggle)) |> Utils.render_list)
     </div>
 };

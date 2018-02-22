@@ -11,7 +11,9 @@ let make = _children => {
   ...component,
   render: _self =>
     <div>
-      <div className="github-fork-ribbon-wrapper right d-sm-none d-md-block"> ribbon </div>
-      <div className="github-fork-ribbon-wrapper right-bottom d-md-none d-sm-block"> ribbon </div>
+      <div className="github-fork-ribbon-wrapper right d-none d-xs-block d-sm-block"> ribbon </div>
+      <div className="github-fork-ribbon-wrapper right-bottom d-block d-xs-none d-sm-none">
+        ribbon
+      </div>
     </div>
 };
