@@ -4,8 +4,8 @@ type position = (int, int);
 
 let safe_index = (len, i) => i === (-1) ? len - 1 : i === len ? 0 : i;
 
-let map_grid = (fn: (position, bool, grid) => bool, g: grid) =>
-  List.mapi((y, row) => row |> List.mapi((x, tile) => fn((y, x), tile, g)), g);
+let map_grid = (fn: (position, bool, grid) => bool, grid) : grid =>
+  List.mapi((y, row) => row |> List.mapi((x, tile) => fn((y, x), tile, grid)), grid);
 
 let make_blank_grid = (size: int) : grid =>
   Array.make(size, Array.make(size, false) |> Array.to_list) |> Array.to_list;
