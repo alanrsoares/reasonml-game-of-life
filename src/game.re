@@ -5,7 +5,9 @@ type position = (int, int);
 let safe_index = (len, i) => i === (-1) ? len - 1 : i === len ? 0 : i;
 
 let map_grid = (fn: (position, bool, grid) => bool, grid) : grid =>
-  List.(mapi((y, row) => row |> mapi((x, tile) => fn((y, x), tile, grid)), grid));
+  List.(
+    mapi((y, row) => row |> mapi((x, tile) => fn((y, x), tile, grid)), grid)
+  );
 
 let make_blank_grid = (size: int) : grid =>
   Array.(make(size, make(size, false) |> to_list) |> to_list);
@@ -22,7 +24,7 @@ let get_tile = ((x, y): position, g: grid) : bool => {
   List.(nth(nth(g, y'), x'));
 };
 
-let count_living_neighbours = ((x, y): position, g: grid) => {
+let count_living_neighbours = ((x, y): position, g: grid) =>
   [
     (y - 1, x - 1),
     (y - 1, x),
@@ -32,8 +34,8 @@ let count_living_neighbours = ((x, y): position, g: grid) => {
     (y + 1, x - 1),
     (y + 1, x),
     (y + 1, x + 1)
-  ] |> List.fold_left((count, p) => get_tile(p, g) ? count + 1 : count, 0);
-};
+  ]
+  |> List.fold_left((count, p) => get_tile(p, g) ? count + 1 : count, 0);
 
 let will_live = (score: ref(int), p: position, isAlive: bool, g: grid) : bool => {
   let n = count_living_neighbours(p, g);
@@ -44,7 +46,10 @@ let will_live = (score: ref(int), p: position, isAlive: bool, g: grid) : bool =>
   it_lives;
 };
 
-let next_generation = (score: ref(int), g: grid) : grid => g |> map_grid(will_live(score));
+let next_generation = (score: ref(int), g: grid) : grid =>
+  g |> map_grid(will_live(score));
 
 let toggle_tile = ((x, y): position) =>
-  map_grid(((x', y'), isAlive, _) => x === x' && y === y' ? ! isAlive : isAlive);
+  map_grid(((x', y'), isAlive, _) =>
+    x === x' && y === y' ? ! isAlive : isAlive
+  );
