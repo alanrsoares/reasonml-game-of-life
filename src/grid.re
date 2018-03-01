@@ -1,3 +1,5 @@
+open Utils;
+
 [%bs.raw {|require('./grid.css')|}];
 
 let component = ReasonReact.statelessComponent("Grid");
@@ -9,8 +11,8 @@ let renderRow = (tileSize, onToggle, y: int, row) =>
   <div
     className="Grid--row"
     key=(string_of_int(y))
-    style=(Utils.make_style(~height=string_of_int(tileSize) ++ "px", ()))>
-    (row |> List.mapi(renderTile(tileSize, onToggle(y))) |> Utils.render_list)
+    style=(make_style(~height=string_of_int(tileSize) ++ "px", ()))>
+    (row |> List.mapi(renderTile(tileSize, onToggle(y))) |> render_list)
   </div>;
 
 let make = (~tileSize, ~data: Game.grid, ~onToggle, _children) => {
@@ -18,7 +20,7 @@ let make = (~tileSize, ~data: Game.grid, ~onToggle, _children) => {
   render: _self =>
     <div
       className="Grid"
-      style=(Utils.make_style(~width=string_of_int(tileSize * List.length(data) + 10) ++ "px", ()))>
-      (data |> List.mapi(renderRow(tileSize, onToggle)) |> Utils.render_list)
+      style=(make_style(~width=string_of_int(tileSize * List.length(data) + 10) ++ "px", ()))>
+      (data |> List.mapi(renderRow(tileSize, onToggle)) |> render_list)
     </div>
 };

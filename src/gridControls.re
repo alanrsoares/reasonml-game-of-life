@@ -1,3 +1,5 @@
+open Utils;
+
 [%bs.raw {|require('./gridControls.css')|}];
 
 let component = ReasonReact.statelessComponent("GridControls");
@@ -9,17 +11,17 @@ let make =
     <div className="GridControls">
       <div className="btn-group" role="group">
         <button className="btn btn-danger" onClick=onReset>
-          (Utils.render_string("RESET"))
+          (render_string("RESET"))
         </button>
         <button className="btn btn-success" onClick=onRandom>
-          (Utils.render_string("RANDOMIZE"))
+          (render_string("RANDOMIZE"))
         </button>
         <button
           className="btn btn-secondary"
           disabled=(Js.Boolean.to_js_boolean(isPlaying))
           onClick=onTick>
           <i className="mr-2 fa fa-fast-forward" />
-          (Utils.render_string("NEXT"))
+          (render_string("NEXT"))
         </button>
         <ToggleButton
           label=(isPlaying ? "PAUSE" : "PLAY")

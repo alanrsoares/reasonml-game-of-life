@@ -1,3 +1,5 @@
+open Utils;
+
 [%bs.raw {|require('./app.css')|}];
 
 type state = {
@@ -29,11 +31,11 @@ let component = ReasonReact.reducerComponent("App");
 
 let handle_toggle_autoplay = (self: self_props, _) => {
   let rec play = () => {
-    self.state.animationFrameId := Utils.request_animation_frame(play);
+    self.state.animationFrameId := request_animation_frame(play);
     self.send(Tick);
   };
   if (self.state.isPlaying) {
-    Utils.cancel_animation_frame(self.state.animationFrameId^);
+    cancel_animation_frame(self.state.animationFrameId^);
     self.send(Stop);
   } else {
     play();
@@ -89,13 +91,13 @@ let make = (~tileSize, ~boardSize, _children) => {
         onToggleAutoplay=(handle_toggle_autoplay(self))
       />
       <div className="App--score align-text-center">
-        <span className="App--score-label"> (Utils.render_string("score")) </span>
-        (Utils.render_string(string_of_int(self.state.score^)))
+        <span className="App--score-label"> (render_string("score")) </span>
+        (render_string(string_of_int(self.state.score^)))
       </div>
       <Grid tileSize data=self.state.grid onToggle=((y, x) => self.send(Toggle((y, x)))) />
       <div className="App--profiler">
         (
-          Utils.render_string(
+          render_string(
             self.state.isPlaying ?
               "avg update rate: " ++ string_of_int(self.state.frameRate) ++ " fps" : ""
           )

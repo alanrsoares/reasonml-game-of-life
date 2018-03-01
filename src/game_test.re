@@ -1,5 +1,4 @@
 open Jest;
-
 open Expect;
 
 describe("Game", () => {
