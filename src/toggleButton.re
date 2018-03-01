@@ -1,3 +1,5 @@
+open Utils;
+
 let component = ReasonReact.statelessComponent("ToggleButton");
 
 let make = (~label, ~isToggled, ~onClick, _children) => {
@@ -6,8 +8,8 @@ let make = (~label, ~isToggled, ~onClick, _children) => {
     <button onClick className=("btn btn-secondary " ++ (isToggled ? "active" : ""))>
       <i
         className=("mr-2 fa " ++ (isToggled ? "active fa-pause" : "fa-play"))
-        style=(Utils.make_style(~width="12px", ()))
+        style=(make_style(~width="12px", ()))
       />
-      (Utils.render_string(label))
+      (render_string(label))
     </button>
 };
