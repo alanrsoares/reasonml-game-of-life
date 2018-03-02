@@ -24,35 +24,39 @@ let get_tile = ((x, y): position, g: grid) : bool => {
   List.(nth(nth(g, y'), x'));
 };
 
-let get_neighbours = ((y, x): position) : list(position) => [
-  (y - 1, x - 1),
-  (y - 1, x),
-  (y - 1, x + 1),
-  (y, x - 1),
-  (y, x + 1),
-  (y + 1, x - 1),
-  (y + 1, x),
-  (y + 1, x + 1)
-];
+let get_neighbours = ((y, x): position, grid) : list(bool) =>
+  [
+    (y - 1, x - 1),
+    (y - 1, x),
+    (y - 1, x + 1),
+    (y, x - 1),
+    (y, x + 1),
+    (y + 1, x - 1),
+    (y + 1, x),
+    (y + 1, x + 1)
+  ]
+  |> List.map(p => get_tile(p, grid));
 
-let count_living_neighbours = (position, g: grid) =>
-  position
-  |> get_neighbours
-  |> List.fold_left((count, p) => get_tile(p, g) ? count + 1 : count, 0);
+let count_living_neighbours = (position, grid) =>
+  grid
+  |> get_neighbours(position)
+  |> List.fold_left((count, is_alive) => is_alive ? count + 1 : count, 0);
 
-let will_live = (score: ref(int), p: position, isAlive: bool, g: grid) : bool => {
-  let n = count_living_neighbours(p, g);
-  let it_lives = isAlive ? n >= 2 && n <= 3 : n === 3;
-  if (it_lives && ! isAlive) {
+let will_live = (score: ref(int), position, is_alive: bool, grid) : bool => {
+  let it_lives =
+    grid
+    |> count_living_neighbours(position)
+    |> (n => is_alive ? n >= 2 && n <= 3 : n === 3);
+  if (it_lives && ! is_alive) {
     score := score^ + 1;
   };
   it_lives;
 };
 
-let next_generation = (score: ref(int), g: grid) : grid =>
-  g |> map_grid(will_live(score));
+let next_generation = (score: ref(int), grid) =>
+  grid |> map_grid(will_live(score));
 
 let toggle_tile = ((x, y): position) =>
-  map_grid(((x', y'), isAlive, _) =>
-    x === x' && y === y' ? ! isAlive : isAlive
+  map_grid(((x', y'), is_alive, _) =>
+    x === x' && y === y' ? ! is_alive : is_alive
   );
