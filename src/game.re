@@ -24,17 +24,20 @@ let get_tile = ((x, y): position, g: grid) : bool => {
   List.(nth(nth(g, y'), x'));
 };
 
-let count_living_neighbours = ((x, y): position, g: grid) =>
-  [
-    (y - 1, x - 1),
-    (y - 1, x),
-    (y - 1, x + 1),
-    (y, x - 1),
-    (y, x + 1),
-    (y + 1, x - 1),
-    (y + 1, x),
-    (y + 1, x + 1)
-  ]
+let get_neighbours = ((y, x): position) : list(position) => [
+  (y - 1, x - 1),
+  (y - 1, x),
+  (y - 1, x + 1),
+  (y, x - 1),
+  (y, x + 1),
+  (y + 1, x - 1),
+  (y + 1, x),
+  (y + 1, x + 1)
+];
+
+let count_living_neighbours = (position, g: grid) =>
+  position
+  |> get_neighbours
   |> List.fold_left((count, p) => get_tile(p, g) ? count + 1 : count, 0);
 
 let will_live = (score: ref(int), p: position, isAlive: bool, g: grid) : bool => {
