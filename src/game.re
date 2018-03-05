@@ -38,9 +38,12 @@ let get_neighbours = ((y, x): position, grid) : list(bool) =>
   |> List.map(p => get_tile(p, grid));
 
 let count_living_neighbours = (position, grid) =>
-  grid
-  |> get_neighbours(position)
-  |> List.fold_left((count, is_alive) => is_alive ? count + 1 : count, 0);
+  List.(
+    grid
+    |> get_neighbours(position)
+    |> filter(Utils.identity) /* only live cells */
+    |> length
+  );
 
 let will_live = (score: ref(int), position, is_alive: bool, grid) : bool => {
   let it_lives =

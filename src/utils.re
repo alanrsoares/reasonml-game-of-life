@@ -12,3 +12,5 @@ let render_array = ReasonReact.arrayToElement;
 let render_list = xs => xs |> Array.of_list |> render_array;
 
 let make_style = ReactDOMRe.Style.make;
+
+let identity = x => x;
