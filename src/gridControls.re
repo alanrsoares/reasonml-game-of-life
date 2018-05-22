@@ -18,7 +18,7 @@ let make =
         </button>
         <button
           className="btn btn-secondary"
-          disabled=(Js.Boolean.to_js_boolean(isPlaying))
+          disabled=(isPlaying)
           onClick=onTick>
           <i className="mr-2 fa fa-fast-forward" />
           (render_string("NEXT"))
