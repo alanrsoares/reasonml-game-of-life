@@ -31,14 +31,14 @@ describe("Game", () => {
         [o, o, o, o, o],
         [o, x, x, x, o],
         [o, o, o, o, o],
-        [o, o, o, o, o]
+        [o, o, o, o, o],
       ];
       let next_grid = [
         [o, o, o, o, o],
         [o, o, x, o, o],
         [o, o, x, o, o],
         [o, o, x, o, o],
-        [o, o, o, o, o]
+        [o, o, o, o, o],
       ];
       test("should transform a horizontal to a vertical line", () =>
         expect(grid |> Game.next_generation(ref(0))) |> toEqual(next_grid)
@@ -53,14 +53,14 @@ describe("Game", () => {
         [o, o, x, o, o],
         [x, x, x, o, o],
         [o, o, o, o, o],
-        [o, o, o, o, o]
+        [o, o, o, o, o],
       ];
       let next_grid = [
         [o, o, o, o, o],
         [x, o, x, o, o],
         [o, x, x, o, o],
         [o, x, o, o, o],
-        [o, o, o, o, o]
+        [o, o, o, o, o],
       ];
       test("should move a glider to the next step", () =>
         expect(grid |> Game.next_generation(ref(0))) |> toEqual(next_grid)

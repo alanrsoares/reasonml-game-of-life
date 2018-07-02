@@ -17,5 +17,5 @@ let make = _children => {
     <div>
       (renderRibbon("right d-none d-md-block"))
       (renderRibbon("right-bottom d-block d-md-none"))
-    </div>
+    </div>,
 };

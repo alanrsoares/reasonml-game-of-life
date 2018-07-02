@@ -6,7 +6,10 @@ let safe_index = (len, i) => i === (-1) ? len - 1 : i === len ? 0 : i;
 
 let map_grid = (fn: (position, bool, grid) => bool, grid) : grid =>
   List.(
-    mapi((y, row) => row |> mapi((x, tile) => fn((y, x), tile, grid)), grid)
+    mapi(
+      (y, row) => row |> mapi((x, tile) => fn((y, x), tile, grid)),
+      grid,
+    )
   );
 
 let make_blank_grid = (size: int) : grid =>
@@ -33,7 +36,7 @@ let get_neighbours = ((y, x): position, grid) : list(bool) =>
     (y, x + 1),
     (y + 1, x - 1),
     (y + 1, x),
-    (y + 1, x + 1)
+    (y + 1, x + 1),
   ]
   |> List.map(p => get_tile(p, grid));
 
@@ -41,7 +44,7 @@ let count_living_neighbours = (position, grid) =>
   List.(
     grid
     |> get_neighbours(position)
-    |> filter(Utils.identity) /* only live cells */
+    |> filter(Utils.identity)  /* only live cells */
     |> length
   );
 

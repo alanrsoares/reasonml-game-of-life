@@ -17,9 +17,7 @@ let make =
           (render_string("RANDOMIZE"))
         </button>
         <button
-          className="btn btn-secondary"
-          disabled=(isPlaying)
-          onClick=onTick>
+          className="btn btn-secondary" disabled=isPlaying onClick=onTick>
           <i className="mr-2 fa fa-fast-forward" />
           (render_string("NEXT"))
         </button>
@@ -29,5 +27,5 @@ let make =
           onClick=onToggleAutoplay
         />
       </div>
-    </div>
+    </div>,
 };
