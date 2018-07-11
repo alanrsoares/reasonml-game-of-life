@@ -5,10 +5,11 @@
   text-align: right;
   font-size: 32px;
   font-weight: 400;
-  font-family: "Courier New", Courier, "Lucida Sans Typewriter", "Lucida Typewriter", monospace;
+  font-family: "Courier New", Courier, "Lucida Sans Typewriter",
+    "Lucida Typewriter", monospace;
   border-radius: 4px;
   background-color: #111;
-  width: 380px;
+  width: 338px;
   color: gold;
 }
 
