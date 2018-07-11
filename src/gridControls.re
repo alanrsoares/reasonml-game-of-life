@@ -19,10 +19,10 @@ let make =
         <button
           className="btn btn-secondary" disabled=isPlaying onClick=onTick>
           <i className="mr-2 fa fa-fast-forward" />
-          (render_string("NEXT"))
+          (render_string(""))
         </button>
         <ToggleButton
-          label=(isPlaying ? "PAUSE" : "PLAY")
+          label=(isPlaying ? "" : "")
           isToggled=isPlaying
           onClick=onToggleAutoplay
         />
