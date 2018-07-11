@@ -18,7 +18,7 @@ let make =
         </button>
         <button
           className="btn btn-secondary" disabled=isPlaying onClick=onTick>
-          <i className="mr-2 fa fa-fast-forward" />
+          <i className="mr-2 ml-2 fa fa-fast-forward" />
         </button>
         <ToggleButton label="" isToggled=isPlaying onClick=onToggleAutoplay />
       </div>
