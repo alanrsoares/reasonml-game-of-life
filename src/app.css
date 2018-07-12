@@ -13,14 +13,14 @@
   color: gold;
 }
 
-.App--profiler {
-  margin: auto;
-  width: 380px;
-  color: #666;
-}
-
 .App--score-label {
   float: left;
   color: #666;
   font-weight: 500;
+}
+
+.App--profiler {
+  margin: auto;
+  width: 338px;
+  color: #666;
 }

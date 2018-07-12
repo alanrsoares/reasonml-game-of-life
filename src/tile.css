@@ -3,12 +3,15 @@
   display: inline-block;
   cursor: pointer;
   border: solid 1px #111;
+  border-radius: 2px;
   -webkit-transition: background-color 0.15s ease-out;
   -moz-transition: background-color 0.15s ease-out;
   -o-transition: background-color 0.15s ease-out;
   transition: background-color 0.15s ease-out;
+  width: 11.26px;
+  height: 11.26px;
 }
 
 .Tile:hover {
-  background-color: #484D52;
+  background-color: #484d52;
 }

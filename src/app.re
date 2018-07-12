@@ -47,7 +47,7 @@ let handle_toggle_autoplay = (_, self: self_props) => {
   };
 };
 
-let make = (~tileSize, ~boardSize, _children) => {
+let make = (~boardSize, _children) => {
   ...component,
   initialState: () => {
     grid: Game.make_random_grid(boardSize, make_seed()),
@@ -118,7 +118,6 @@ let make = (~tileSize, ~boardSize, _children) => {
         (render_string(string_of_int(self.state.score^)))
       </div>
       <Grid
-        tileSize
         data=self.state.grid
         onToggle=((y, x) => self.send(Toggle((y, x))))
       />
@@ -133,6 +132,5 @@ let make = (~tileSize, ~boardSize, _children) => {
           )
         )
       </div>
-      <GithubForkRibbon />
     </div>,
 };
