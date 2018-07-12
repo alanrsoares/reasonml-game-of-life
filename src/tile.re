@@ -15,10 +15,7 @@ let make = (~isAlive, ~onToggle, _children) => {
       onMouseOver=(handleMouseEvent(onToggle))
       onMouseDown=(handleMouseEvent(onToggle))
       style=(
-        Utils.make_style(
-          ~backgroundColor=isAlive ? "#fff" : "transparent",
-          (),
-        )
+        Utils.make_style(~backgroundColor=isAlive ? "#fff" : "#272B30", ())
       )
     />,
 };
