@@ -1,18 +1,10 @@
 {
   "name": "reason-scripts",
-  "sources": [
-    "src"
-  ],
-  "bs-dependencies": [
-    "reason-react",
-    "@glennsl/bs-jest"
-  ],
+  "sources": ["src"],
+  "bs-dependencies": ["reason-react", "@glennsl/bs-jest", "bs-fetch"],
   "reason": {
     "react-jsx": 2
   },
-  "bsc-flags": [
-    "-bs-super-errors"
-  ],
   "refmt": 3,
   "package-specs": {
     "module": "commonjs",
