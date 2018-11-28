@@ -1,12 +1,8 @@
 {
-  "name": "reason-game-of-life",
+  "name": "reasonml-game-of-life",
   "version": "0.1.0",
   "private": true,
-  "dependencies": {
-    "react": "^16.6.3",
-    "react-dom": "^16.6.3",
-    "reason-scripts": "1.0.0"
-  },
+  "homepage": "http://alanrsoares.github.io/reasonml-game-of-life",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
@@ -24,6 +20,11 @@
     "not ie <= 11",
     "not op_mini all"
   ],
+  "dependencies": {
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3",
+    "reason-scripts": "1.0.0"
+  },
   "devDependencies": {
     "@glennsl/bs-jest": "^0.4.5",
     "bs-fetch": "^0.3.1",
