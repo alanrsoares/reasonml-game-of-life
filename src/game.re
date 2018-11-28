@@ -8,6 +8,11 @@ type position = (int, int);
 
 let safe_index = (len, i) => i < 0 ? len - 1 : i === len ? 0 : i;
 
+let safe_position = ((y, x): position, len) => (
+  safe_index(len, y),
+  safe_index(len, x),
+);
+
 let map_grid = (fn: (position, cell_state, grid) => cell_state, grid): grid =>
   Array.(
     mapi(
@@ -26,10 +31,9 @@ let make_random_grid = (size: int, seed: int): grid => {
   |> map_grid((_, _, _) => Random.int(10) > 7 ? Alive : Dead);
 };
 
-let get_tile = (grid, (y, x): position) => {
-  let safe = safe_index(Array.length(grid));
-
-  grid[safe(y)][safe(x)];
+let get_tile = (grid, position) => {
+  let (y, x) = position->safe_position(Array.length(grid));
+  grid[y][x];
 };
 
 let get_neighbours = ((y, x): position, grid) =>
@@ -55,26 +59,23 @@ let count_living_neighbours = (grid, position) =>
 
 let will_live = (score: ref(int), position, cell_state: cell_state, grid) => {
   let neighbours = grid->count_living_neighbours(position);
-  let next_state =
-    switch (cell_state, neighbours) {
-    | (Alive, 2 | 3) => Alive
-    | (Dead, 3) =>
-      score := score^ + 1;
-      Alive;
-    | _ => Dead
-    };
-
-  next_state;
+  switch (cell_state, neighbours) {
+  | (Alive, 2 | 3) => Alive
+  | (Dead, 3) =>
+    score := score^ + 1;
+    Alive;
+  | _ => Dead
+  };
 };
 
 let next_generation = (score: ref(int)) => map_grid(will_live(score));
 
-let toggle_tile = (grid, (y, x): position) => {
+let toggle_tile = (grid, position) => {
   let grid' = grid |> Array.map(Array.copy);
-  let safe = safe_index(grid'->Array.length);
-  let tile = grid'[safe(y)][safe(x)];
+  let (y, x) = position->safe_position(Array.length(grid));
+  let tile = grid'[y][x];
 
-  grid'[safe(y)][safe(x)] = (
+  grid'[y][x] = (
     switch (tile) {
     | Alive => Dead
     | _ => Alive
