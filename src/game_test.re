@@ -25,14 +25,17 @@ describe("Game", () => {
     })
   );
 
-  describe("toggle_cell", () =>
-    test("should toggle the middle cell", () => {
-      let grid = [|[|o, o, o|], [|x, x, x|], [|o, o, o|]|];
-      let next_grid = [|[|o, o, o|], [|x, o, x|], [|o, o, o|]|];
-      let tile_position: Game.position = (1, 1);
-      expect(grid->Game.toggle_tile(tile_position)) |> toEqual(next_grid);
-    })
-  );
+  describe("toggle_cell", () => {
+    let grid = [|[|o, o, o|], [|x, x, x|], [|o, o, o|]|];
+    let next_grid = [|[|o, o, o|], [|x, o, x|], [|o, o, o|]|];
+    let tile_position: Game.position = (1, 1);
+    test("should toggle the middle cell", () =>
+      expect(grid->Game.toggle_tile(tile_position)) |> toEqual(next_grid)
+    );
+    test("should revert the middle cell to its original state", () =>
+      expect(next_grid->Game.toggle_tile(tile_position)) |> toEqual(grid)
+    );
+  });
 
   describe("next_generation", () => {
     describe("the cross pattern", () => {

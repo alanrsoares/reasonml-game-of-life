@@ -70,15 +70,16 @@ let will_live = (score: ref(int), position, cell_state: cell_state, grid) => {
 let next_generation = (score: ref(int)) => map_grid(will_live(score));
 
 let toggle_tile = (grid, (y, x): position) => {
-  let safe = safe_index(grid->Array.length);
-  let tile = grid[safe(y)][safe(x)];
+  let grid' = grid |> Array.map(Array.copy);
+  let safe = safe_index(grid'->Array.length);
+  let tile = grid'[safe(y)][safe(x)];
 
-  grid[safe(y)][safe(x)] = (
+  grid'[safe(y)][safe(x)] = (
     switch (tile) {
     | Alive => Dead
     | _ => Alive
     }
   );
 
-  grid;
+  grid';
 };
