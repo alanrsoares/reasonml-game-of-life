@@ -101,28 +101,28 @@ let make = (~boardSize, _children) => {
     | Toggle(position) =>
       ReasonReact.Update({
         ...state,
-        grid: Game.toggle_tile(position, state.grid),
+        grid: state.grid->Game.toggle_tile(position),
       })
     },
   render: self =>
     <div className="App">
       <GridControls
-        isPlaying=self.state.isPlaying
-        onReset=(_ => self.send(Reset))
-        onRandom=(_ => self.send(Random))
-        onTick=(_ => self.send(Tick))
-        onToggleAutoplay=(self.handle(handle_toggle_autoplay))
+        isPlaying={self.state.isPlaying}
+        onReset={_ => self.send(Reset)}
+        onRandom={_ => self.send(Random)}
+        onTick={_ => self.send(Tick)}
+        onToggleAutoplay={self.handle(handle_toggle_autoplay)}
       />
       <div className="App--score align-text-center">
-        <span className="App--score-label"> (render_string("score")) </span>
-        (render_string(string_of_int(self.state.score^)))
+        <span className="App--score-label"> {render_string("score")} </span>
+        {render_string(string_of_int(self.state.score^))}
       </div>
       <Grid
-        data=self.state.grid
-        onToggle=((y, x) => self.send(Toggle((y, x))))
+        data={self.state.grid}
+        onToggle={(y, x) => self.send(Toggle((y, x)))}
       />
       <div className="App--profiler">
-        (
+        {
           render_string(
             self.state.isPlaying ?
               "avg update rate: "
@@ -130,7 +130,7 @@ let make = (~boardSize, _children) => {
               ++ " fps" :
               "",
           )
-        )
+        }
       </div>
     </div>,
 };
