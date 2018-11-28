@@ -1,11 +1,11 @@
 self.__precacheManifest = [
   {
-    "revision": "252e47b7d968605003ad",
+    "revision": "84e133fafc3edfa2e92a",
     "url": "/reasonml-game-of-life/static/css/main.06fd0f55.chunk.css"
   },
   {
-    "revision": "252e47b7d968605003ad",
-    "url": "/reasonml-game-of-life/static/js/main.252e47b7.chunk.js"
+    "revision": "84e133fafc3edfa2e92a",
+    "url": "/reasonml-game-of-life/static/js/main.84e133fa.chunk.js"
   },
   {
     "revision": "6a80133f936d184c7e0e",
@@ -16,7 +16,7 @@ self.__precacheManifest = [
     "url": "/reasonml-game-of-life/static/js/runtime~main.f7c3508b.js"
   },
   {
-    "revision": "6cf2297c279015252a5cc365b494551a",
+    "revision": "6c821d8668e31e9907811444419429ed",
     "url": "/reasonml-game-of-life/index.html"
   }
 ];

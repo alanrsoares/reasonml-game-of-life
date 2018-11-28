@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/reasonml-game-of-life/precache-manifest.3e0e9eeb427665c6c18d0e9efa208046.js"
+  "/reasonml-game-of-life/precache-manifest.46ad80f7a08162ff806dc34700a53f6a.js"
 );
 
 workbox.clientsClaim();
