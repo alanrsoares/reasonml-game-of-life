@@ -12,13 +12,13 @@ let make =
       <div className="btn-group" role="group">
         <button
           ariaLabel="reset game" className="btn btn-danger" onClick=onReset>
-          (render_string("RESET"))
+          {render_string("RESET")}
         </button>
         <button
           ariaLabel="generate random board"
           className="btn btn-success"
           onClick=onRandom>
-          (render_string("RANDOMIZE"))
+          {render_string("RANDOMIZE")}
         </button>
         <button
           ariaLabel="next generation"
