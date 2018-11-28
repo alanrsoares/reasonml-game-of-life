@@ -68,7 +68,7 @@ let will_live = (score: ref(int), position, cell_state: cell_state, grid) => {
   };
 };
 
-let next_generation = (score: ref(int)) => map_grid(will_live(score));
+let next_generation = score => map_grid(will_live(score));
 
 let toggle_tile = (grid, position) => {
   let grid' = grid |> Array.map(Array.copy);
