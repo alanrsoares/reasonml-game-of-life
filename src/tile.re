@@ -2,9 +2,9 @@
 
 let component = ReasonReact.statelessComponent("Tile");
 
-let handleMouseEvent = (onToggle, e) =>
+let handle_mouse_event = (callback, e) =>
   if (ReactEvent.Mouse.nativeEvent(e)##which === 1) {
-    onToggle();
+    callback();
   };
 
 let make = (~isAlive, ~onToggle, _children) => {
@@ -12,8 +12,8 @@ let make = (~isAlive, ~onToggle, _children) => {
   render: _self =>
     <div
       className="Tile"
-      onMouseOver={handleMouseEvent(onToggle)}
-      onMouseDown={handleMouseEvent(onToggle)}
+      onMouseOver={handle_mouse_event(onToggle)}
+      onMouseDown={handle_mouse_event(onToggle)}
       style={
         Utils.make_style(~backgroundColor=isAlive ? "#fff" : "#272B30", ())
       }
